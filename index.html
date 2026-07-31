@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Altax Contabilidade — Reforma Tributária sem surpresas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ============================================
+   MARCO TRIBUTÁRIA — CSS Moderno e Leve
+   ============================================ */
+
+/* ── 1. RESET & TOKENS ─────────────────────── */
+
+:root {
+  --ink: #0f172a;
+  --ink-80: #1e293b;
+  --ink-60: #334155;
+  --ink-40: #64748b;
+  --ink-20: #94a3b8;
+  --ink-10: #cbd5e1;
+  --ink-5: #f1f5f9;
+  --ink-2: #f8fafc;
+  --accent: #2563eb;
+  --accent-light: #3b82f6;
+  --accent-dark: #1d4ed8;
+  --accent-10: #eff6ff;
+  --accent-20: #dbeafe;
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --radius: 14px;
+  --radius-sm: 10px;
+  --shadow-sm: 0 1px 2px rgba(15,23,42,0.04);
+  --shadow: 0 4px 24px rgba(15,23,42,0.06);
+  --shadow-lg: 0 12px 40px rgba(15,23,42,0.08);
+  --max-w: 1160px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-80);
+  background: var(--ink-2);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+
+/* ── 2. UTILITÁRIOS ────────────────────────── */
+
+.wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-dark);
+  margin-bottom: 10px;
+}
+
+.section-head {
+  max-width: 720px;
+  margin-bottom: 34px;
+}
+
+.section-head h2 {
+  font-size: clamp(26px, 3.2vw, 38px);
+  margin-bottom: 12px;
+}
+
+.section-head p {
+  font-size: 16px;
+  color: var(--ink-40);
+  line-height: 1.6;
+}
+
+/* ── 3. SCROLL PROGRESS ────────────────────── */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--accent);
+  z-index: 9999;
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+/* ── 4. DOTS NAV (desktop only) ────────────── */
+
+.dots-nav {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease-out);
+}
+
+.dots-nav.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.dots-nav button {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--ink-20);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-out);
+  padding: 0;
+}
+
+.dots-nav button.active,
+.dots-nav button:hover {
+  border-color: var(--accent);
+  background: var(--accent);
+  transform: scale(1.25);
+}
+
+.dot-label {
+  position: absolute;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-60);
+  background: var(--surface);
+  padding: 4px 10px;
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  transform: translateY(-50%) translateX(4px);
+}
+
+.dots-nav button:hover .dot-label {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* ── 5. HEADER ─────────────────────────────── */
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: rgba(248, 250, 252, 0.72);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border-bottom: 1px solid rgba(203, 213, 225, 0.4);
+  transition: box-shadow 0.3s;
+}
+
+header.scrolled {
+  box-shadow: 0 1px 12px rgba(15,23,42,0.05);
+}
+
+header > nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 58px;
+}
+
+.logo {
+  font-family: 'Fraunces', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  gap: 8px;
+}
+.logo svg{ flex-shrink: 0; }
+
+.logo span {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.navlinks {
+  display: flex;
+  gap: 24px;
+}
+
+.navlinks a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-60);
+  position: relative;
+  transition: color 0.2s;
+}
+
+.navlinks a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+  transition: width 0.3s var(--ease-out);
+}
+
+.navlinks a:hover {
+  color: var(--ink);
+}
+
+.navlinks a:hover::after {
+  width: 100%;
+}
+
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  transition: all 0.25s var(--ease-out);
+}
+
+.nav-cta:hover {
+  background: var(--ink-80);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+/* ── 6. HERO ───────────────────────────────── */
+
+.hero {
+  padding: 84px 0 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, var(--accent-20) 0%, transparent 70%);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.hero > .wrap {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.hero h1 {
+  font-size: clamp(32px, 4.2vw, 48px);
+  line-height: 1.14;
+  margin-bottom: 14px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent-dark);
+}
+
+.hero .lead {
+  font-size: 17px;
+  color: var(--ink-40);
+  max-width: 560px;
+  margin-bottom: 22px;
+  line-height: 1.65;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  transition: all 0.25s var(--ease-out);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
+}
+
+.btn-primary:hover {
+  background: var(--accent-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
+}
+
+.btn-primary svg {
+  transition: transform 0.25s var(--ease-out);
+}
+
+.btn-primary:hover svg {
+  transform: translateX(3px);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink-60);
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--ink-10);
+  background: transparent;
+  transition: all 0.25s var(--ease-out);
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+  background: var(--accent-10);
+}
+
+/* Hero Panel */
+.hero-panel {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--ink-5);
+  position: relative;
+}
+
+.hero-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 20px;
+  right: 20px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 0 0 2px 2px;
+}
+
+.hero-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.hero-panel-header .eyebrow {
+  margin-bottom: 0;
+}
+
+.live-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-dark);
+  background: var(--accent-10);
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--ink-5);
+}
+
+.hero-stat:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.hero-stat .num {
+  font-family: 'Fraunces', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.hero-stat .lbl {
+  font-size: 13px;
+  color: var(--ink-40);
+  line-height: 1.5;
+}
+
+/* ── 7. TRUSTBAR ───────────────────────────── */
+
+.trustbar {
+  background: var(--ink);
+  color: #fff;
+  padding: 12px 0;
+  overflow: hidden;
+}
+
+.trustbar .wrap {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.trustbar .item {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-20);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.trustbar .item::before {
+  content: '✓';
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background: var(--accent);
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+/* ── 8. SEÇÕES GERAIS ──────────────────────── */
+
+section {
+  padding: 60px 0;
+  position: relative;
+}
+
+section:nth-child(even) {
+  background: var(--surface);
+}
+
+/* ── 9. O QUE MUDA ─────────────────────────── */
+
+.change-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.change-card {
+  background: var(--surface);
+  border: 1px solid var(--ink-5);
+  border-radius: var(--radius);
+  padding: 22px;
+  transition: all 0.35s var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+.change-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.change-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent-20);
+}
+
+.change-card:hover::before {
+  opacity: 1;
+}
+
+.change-card .tag {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-dark);
+  background: var(--accent-10);
+  padding: 5px 12px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+
+.change-card h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.change-card p {
+  font-size: 15px;
+  color: var(--ink-40);
+  line-height: 1.6;
+}
+
+/* ── 10. LINHA DO TEMPO ────────────────────── */
+
+.timeline-section {
+  background: var(--ink);
+  color: #fff;
+}
+
+.timeline-section .section-head h2,
+.timeline-section .section-head p {
+  color: #fff;
+}
+
+.timeline-section .eyebrow {
+  color: var(--accent-light);
+}
+
+.tl {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius);
+  padding: 26px;
+}
+
+.tl-slider {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 30px;
+  align-items: center;
+}
+
+.tl-display {
+  position: relative;
+}
+
+.tl-display-year {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(64px, 8vw, 96px);
+  font-weight: 700;
+  color: rgba(255,255,255,0.08);
+  line-height: 1;
+  margin-bottom: 6px;
+  transition: color 0.4s var(--ease-out);
+}
+
+.tl-display-year.active {
+  color: var(--accent-light);
+}
+
+.tl-display h4 {
+  font-size: 24px;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.tl-display p {
+  font-size: 15px;
+  color: var(--ink-20);
+  line-height: 1.65;
+  max-width: 420px;
+}
+
+.tl-now-flag {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-light);
+  background: rgba(37, 99, 235, 0.15);
+  padding: 6px 14px;
+  border-radius: 20px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all 0.3s var(--ease-out);
+}
+
+.tl-now-flag.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Timeline Controls */
+.tl-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tl-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.tl-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--accent);
+  border-radius: 50%;
+  border: 3px solid var(--ink);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tl-range::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.3);
+}
+
+.tl-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: var(--accent);
+  border-radius: 50%;
+  border: 3px solid var(--ink);
+  cursor: pointer;
+}
+
+.tl-ticks {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.tl-tick {
+  flex: 1;
+  padding: 8px 4px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-sm);
+  color: var(--ink-40);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-out);
+}
+
+.tl-tick:hover {
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.tl-tick.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3);
+}
+
+.tl-hint {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--ink-40);
+  margin-top: 4px;
+}
+
+.tl-hint svg {
+  opacity: 0.6;
+}
+
+/* ── 11. SERVIÇOS ──────────────────────────── */
+
+.services {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.service {
+  background: var(--surface);
+  border: 1px solid var(--ink-5);
+  border-radius: var(--radius);
+  padding: 22px;
+  transition: all 0.35s var(--ease-out);
+  position: relative;
+}
+
+.service::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 22px;
+  right: 22px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 2px 2px 0 0;
+  transform: scaleX(0);
+  transition: transform 0.35s var(--ease-out);
+}
+
+.service:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent-20);
+}
+
+.service:hover::after {
+  transform: scaleX(1);
+}
+
+.service .n {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.service h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.service p {
+  font-size: 14px;
+  color: var(--ink-40);
+  line-height: 1.6;
+}
+
+/* ── 12. PROCESSO ──────────────────────────── */
+
+.process {
+  background: var(--surface);
+}
+
+.process-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 22px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--ink-5);
+  align-items: start;
+  transition: all 0.3s var(--ease-out);
+}
+
+.process-row:last-child {
+  border-bottom: none;
+}
+
+.process-row:hover {
+  padding-left: 12px;
+}
+
+.step-mono {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  padding-top: 4px;
+}
+
+.process-row h3 {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+
+.process-row p {
+  font-size: 15px;
+  color: var(--ink-40);
+  line-height: 1.6;
+  max-width: 560px;
+}
+
+/* ── 13. PROOF / DEPOIMENTO ────────────────── */
+
+.proof {
+  background: var(--ink-5);
+}
+
+.proof > .wrap {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 36px;
+  align-items: center;
+}
+
+.quote {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(20px, 2.4vw, 26px);
+  font-style: italic;
+  color: var(--ink-80);
+  line-height: 1.5;
+  margin-bottom: 14px;
+  position: relative;
+  padding-left: 20px;
+}
+
+.quote::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 4px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.quote-attr {
+  font-size: 14px;
+  color: var(--ink-40);
+  font-weight: 500;
+}
+
+.proof-numbers {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.proof-numbers > div {
+  padding: 14px 18px;
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--ink-10);
+  transition: all 0.3s var(--ease-out);
+}
+
+.proof-numbers > div:hover {
+  transform: translateX(4px);
+  border-color: var(--accent-20);
+  box-shadow: var(--shadow);
+}
+
+.proof-numbers .num {
+  font-family: 'Fraunces', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.proof-numbers .lbl {
+  font-size: 13px;
+  color: var(--ink-40);
+  line-height: 1.5;
+}
+
+/* ── 14. CTA FINAL ─────────────────────────── */
+
+.cta-final {
+  background: var(--ink);
+  color: #fff;
+  text-align: center;
+  padding: 64px 0 76px;
+}
+
+.cta-final h2 {
+  color: #fff;
+  font-size: clamp(26px, 3.2vw, 38px);
+  max-width: 640px;
+  margin: 0 auto 12px;
+}
+
+.cta-final p {
+  color: var(--ink-20);
+  font-size: 17px;
+  max-width: 560px;
+  margin: 0 auto 22px;
+  line-height: 1.65;
+}
+
+.cta-final .hero-actions {
+  justify-content: center;
+}
+
+.cta-final .btn-primary {
+  background: var(--accent);
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+}
+
+.cta-final .btn-primary:hover {
+  background: var(--accent-light);
+}
+
+.cta-final .btn-ghost {
+  border-color: rgba(255,255,255,0.2);
+  color: var(--ink-20);
+}
+
+.cta-final .btn-ghost:hover {
+  border-color: var(--accent);
+  color: #fff;
+  background: rgba(37, 99, 235, 0.1);
+}
+
+/* ── 15. FOOTER ────────────────────────────── */
+
+footer {
+  background: var(--ink-80);
+  color: #fff;
+  padding: 40px 0 0;
+}
+
+footer > .wrap:first-child {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.fcol h4 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-20);
+  margin-bottom: 10px;
+}
+
+.fcol a {
+  display: block;
+  font-size: 14px;
+  color: var(--ink-40);
+  margin-bottom: 6px;
+  transition: color 0.2s;
+}
+
+.fcol a:hover {
+  color: #fff;
+}
+
+footer > .wrap.bottom {
+  padding: 16px 0;
+  font-size: 12px;
+  color: var(--ink-40);
+  text-align: center;
+}
+
+/* ── 16. ANIMAÇÕES DE ENTRADA ──────────────── */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+
+.reveal-stagger.visible > *:nth-child(1) { transition-delay: 0.05s; opacity: 1; transform: translateY(0); }
+.reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.12s; opacity: 1; transform: translateY(0); }
+.reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.19s; opacity: 1; transform: translateY(0); }
+.reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.26s; opacity: 1; transform: translateY(0); }
+.reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.33s; opacity: 1; transform: translateY(0); }
+.reveal-stagger.visible > *:nth-child(6) { transition-delay: 0.40s; opacity: 1; transform: translateY(0); }
+
+/* ── 17. RESPONSIVO ────────────────────────── */
+
+@media (max-width: 1024px) {
+  .hero > .wrap {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .hero-panel {
+    max-width: 480px;
+  }
+
+  .tl-slider {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .services {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .proof > .wrap {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .dots-nav {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .navlinks, .nav-cta {
+    display: none;
+  }
+
+  .change-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .services {
+    grid-template-columns: 1fr;
+  }
+
+  .process-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .tl {
+    padding: 18px;
+  }
+
+  .tl-ticks {
+    flex-wrap: wrap;
+  }
+
+  .tl-tick {
+    flex: 1 1 calc(25% - 4px);
+    min-width: 60px;
+  }
+
+  footer > .wrap:first-child {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .trustbar .wrap {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  section {
+    padding: 40px 0;
+  }
+
+  .hero {
+    padding: 96px 0 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-primary, .btn-ghost {
+    justify-content: center;
+  }
+
+  .tl-tick {
+    font-size: 10px;
+    padding: 6px 2px;
+  }
+}
+
+/* ── 18. REDUÇÃO DE MOVIMENTO ──────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<nav class="dots-nav" id="dotsNav">
+  <button data-target="hero-top" class="active"><span class="dot-label">Início</span></button>
+  <button data-target="mudanca"><span class="dot-label">O que muda</span></button>
+  <button data-target="linha-do-tempo"><span class="dot-label">Linha do tempo</span></button>
+  <button data-target="servicos"><span class="dot-label">Serviços</span></button>
+  <button data-target="processo"><span class="dot-label">Processo</span></button>
+  <button data-target="contato"><span class="dot-label">Contato</span></button>
+</nav>
+
+<header>
+  <nav class="wrap">
+    <div class="logo">
+      <svg viewBox="0 0 120 120" width="26" height="26" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Altax">
+        <line x1="60" y1="22" x2="25" y2="101" stroke="#0f172a" stroke-width="14" stroke-linecap="round"/>
+        <line x1="60" y1="22" x2="95" y2="101" stroke="#0f172a" stroke-width="14" stroke-linecap="round"/>
+        <line x1="38.2" y1="72" x2="81.8" y2="72" stroke="#2563eb" stroke-width="14" stroke-linecap="round"/>
+      </svg>
+      Altax Contabilidade<span>REFORMA TRIBUTÁRIA</span>
+    </div>
+    <div class="navlinks">
+      <a href="#mudanca">O que muda</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#processo">Como trabalhamos</a>
+      <a href="#contato">Contato</a>
+    </div>
+    <a class="nav-cta" href="#contato">Agendar diagnóstico</a>
+  </nav>
+</header>
+
+<section class="hero" id="hero-top">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">EC 132/2023 · IBS · CBS · IMPOSTO SELETIVO</div>
+      <h1>A reforma tributária vai redesenhar sua carga fiscal.<br>Nós redesenhamos sua operação <em>antes</em> disso acontecer.</h1>
+      <p class="lead">Consultoria especializada na transição do sistema tributário brasileiro. Traduzimos IBS, CBS e o fim gradual de ICMS, ISS, PIS/Cofins e IPI em um plano concreto — com números, prazos e responsáveis — para sua empresa não navegar a reforma no escuro.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#contato">Agendar diagnóstico gratuito</a>
+        <a class="btn-ghost" href="#mudanca">Entender a reforma primeiro ↓</a>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <div class="hero-panel-header">
+        <div class="eyebrow">Onde sua empresa está agora</div>
+        <span class="live-status"><span class="pulse-dot"></span>Fase de teste ativa</span>
+      </div>
+      <div class="hero-stat">
+        <span class="num">2026</span>
+        <span class="lbl">Ano de teste: CBS 0,9% e IBS 0,1%, já em vigor</span>
+      </div>
+      <div class="hero-stat">
+        <span class="num">2033</span>
+        <span class="lbl">Sistema antigo extinto — regime pleno de IBS e CBS</span>
+      </div>
+      <div class="hero-stat">
+        <span class="num">7 anos</span>
+        <span class="lbl">de transição simultânea entre dois sistemas tributários</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trustbar">
+  <div class="wrap">
+    <span class="item">Diagnóstico de impacto tributário setorial</span>
+    <span class="item">Adequação de ERP e SPED Fiscal</span>
+    <span class="item">Acompanhamento ano a ano até 2033</span>
+    <span class="item">Suporte a contadores e departamentos fiscais</span>
+  </div>
+</div>
+
+<section id="mudanca">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">O que muda, em termos práticos</div>
+      <h2>Cinco tributos saem, dois entram. A complexidade não desaparece — ela migra.</h2>
+      <p>A reforma simplifica a estrutura no papel, mas cria um período de convivência entre sistemas onde erro de cálculo, crédito perdido ou sistema desatualizado custam caro. É nesse intervalo que atuamos.</p>
+    </div>
+    <div class="change-grid reveal-stagger">
+      <div class="change-card">
+        <div class="tag">SAI — GRADUALMENTE</div>
+        <h3>ICMS, ISS, PIS, Cofins e IPI</h3>
+        <p>Extinção escalonada entre 2027 e 2033, com convivência simultânea aos novos tributos durante todo o período.</p>
+      </div>
+      <div class="change-card">
+        <div class="tag">ENTRA — FEDERAL</div>
+        <h3>CBS — Contribuição sobre Bens e Serviços</h3>
+        <p>Substitui PIS e Cofins. Cobrança não cumulativa, com crédito amplo sobre insumos, bens e serviços.</p>
+      </div>
+      <div class="change-card">
+        <div class="tag">ENTRA — ESTADUAL/MUNICIPAL</div>
+        <h3>IBS — Imposto sobre Bens e Serviços</h3>
+        <p>Substitui ICMS e ISS. Cobrança no destino, com um comitê gestor unificando estados e municípios.</p>
+      </div>
+      <div class="change-card">
+        <div class="tag">NOVO TRIBUTO</div>
+        <h3>Imposto Seletivo</h3>
+        <p>Incide sobre bens e serviços prejudiciais à saúde ou ao meio ambiente — o "imposto do pecado" da reforma.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="timeline-section" id="linha-do-tempo">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Calendário oficial da transição</div>
+      <h2>Sete anos, uma linha do tempo — e cada trecho exige uma decisão diferente da sua empresa.</h2>
+      <p>Não é uma migração de virada de chave. É um cronograma legal, com alíquotas de teste, percentuais crescentes e uma extinção definitiva marcada. Planejar fora desse calendário é planejar tarde.</p>
+    </div>
+    <div class="tl">
+      <div class="tl-slider">
+        <div class="tl-display">
+          <div class="tl-display-year mono" id="tlYear">2026</div>
+          <h4 id="tlTitle">Fase de teste</h4>
+          <p id="tlDesc">CBS a 0,9% e IBS a 0,1%, sem aumento de carga — valores compensáveis com PIS/Cofins.</p>
+          <span class="tl-now-flag" id="tlFlag">Vigente agora</span>
+        </div>
+        <div class="tl-controls">
+          <input type="range" min="0" max="7" step="1" value="0" class="tl-range" id="tlRange" aria-label="Arraste para navegar pelos anos da transição">
+          <div class="tl-ticks" id="tlTicks">
+            <button class="tl-tick active" data-i="0">2026</button>
+            <button class="tl-tick" data-i="1">2027</button>
+            <button class="tl-tick" data-i="2">2029</button>
+            <button class="tl-tick" data-i="3">2030</button>
+            <button class="tl-tick" data-i="4">2031</button>
+            <button class="tl-tick" data-i="5">2032</button>
+            <button class="tl-tick" data-i="6">2033</button>
+            <button class="tl-tick" data-i="7">Gestão</button>
+          </div>
+          <div class="tl-hint">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 5v14l11-7z" fill="currentColor" stroke="none"/></svg>
+            Arraste o marcador ou clique num ano para ver o que muda em cada fase
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="servicos">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">O que fazemos</div>
+      <h2>Consultoria estruturada em três frentes: entender, ajustar e sustentar.</h2>
+      <p>Cada empresa entra na reforma com um ponto de partida diferente — regime tributário, setor, margem, sistema. O trabalho começa sempre por um raio-x da sua operação específica.</p>
+    </div>
+    <div class="services reveal-stagger">
+      <div class="service">
+        <div class="n">01 — Diagnóstico</div>
+        <h3>Simulação de carga tributária</h3>
+        <p>Comparamos sua carga atual com a projetada em cada fase da transição, por produto, serviço e unidade de negócio, identificando onde a margem aperta primeiro.</p>
+      </div>
+      <div class="service">
+        <div class="n">02 — Planejamento</div>
+        <h3>Reestruturação de precificação e créditos</h3>
+        <p>Revisamos política de preços, aproveitamento de créditos de IBS/CBS e enquadramento em regimes diferenciados ou específicos aplicáveis ao seu setor.</p>
+      </div>
+      <div class="service">
+        <div class="n">03 — Adequação</div>
+        <h3>Sistemas fiscais e ERP</h3>
+        <p>Acompanhamos a atualização de notas fiscais, SPED e integrações do seu ERP às novas obrigações acessórias, em conjunto com sua equipe de TI.</p>
+      </div>
+      <div class="service">
+        <div class="n">04 — Capacitação</div>
+        <h3>Treinamento do time fiscal e financeiro</h3>
+        <p>Formamos sua equipe interna para operar o período de convivência entre sistemas sem depender de terceiros a cada dúvida.</p>
+      </div>
+      <div class="service">
+        <div class="n">05 — Suporte a contadores</div>
+        <h3>Parceria técnica para escritórios contábeis</h3>
+        <p>Damos suporte especializado em reforma tributária a escritórios de contabilidade que precisam responder a seus próprios clientes com segurança.</p>
+      </div>
+      <div class="service">
+        <div class="n">06 — Acompanhamento</div>
+        <h3>Monitoramento contínuo até 2033</h3>
+        <p>A reforma muda ano a ano. Revisamos seu plano a cada nova fase do cronograma legal e a cada regulamentação publicada pelo Comitê Gestor.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="processo">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Como trabalhamos</div>
+      <h2>Quatro etapas, do primeiro número ao acompanhamento contínuo.</h2>
+    </div>
+    <div class="process-row reveal">
+      <span class="step-mono">Etapa 1</span>
+      <div>
+        <h3>Levantamento</h3>
+        <p>Coletamos notas fiscais, apurações e estrutura societária recentes para montar o retrato tributário atual da empresa.</p>
+      </div>
+    </div>
+    <div class="process-row reveal">
+      <span class="step-mono">Etapa 2</span>
+      <div>
+        <h3>Simulação comparativa</h3>
+        <p>Projetamos a carga tributária em cada marco do cronograma da reforma, apontando impacto em preço, margem e fluxo de caixa.</p>
+      </div>
+    </div>
+    <div class="process-row reveal">
+      <span class="step-mono">Etapa 3</span>
+      <div>
+        <h3>Plano de adequação</h3>
+        <p>Entregamos um plano com prazos, responsáveis e prioridades — o que muda no sistema, na precificação e nos processos internos.</p>
+      </div>
+    </div>
+    <div class="process-row reveal">
+      <span class="step-mono">Etapa 4</span>
+      <div>
+        <h3>Acompanhamento</h3>
+        <p>Revisão periódica conforme novas fases entram em vigor e regulamentações do Comitê Gestor do IBS são publicadas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="proof">
+  <div class="wrap">
+    <div>
+      <p class="quote">"Chegamos à consultoria achando que era só trocar de sistema fiscal. Saímos com um plano de precificação que já considerava a alíquota de 2029 em diante."</p>
+      <p class="quote-attr">— Diretoria financeira, indústria de médio porte, atendida na fase de diagnóstico</p>
+    </div>
+    <div class="proof-numbers">
+      <div>
+        <div class="num">2027–2033</div>
+        <div class="lbl">Janela de convivência entre os dois sistemas tributários</div>
+      </div>
+      <div>
+        <div class="num">6</div>
+        <div class="lbl">Tributos afetados diretamente pela reforma</div>
+      </div>
+      <div>
+        <div class="num">1</div>
+        <div class="lbl">Comitê Gestor unificando arrecadação de IBS entre estados e municípios</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final" id="contato">
+  <div class="wrap">
+    <div class="eyebrow" style="justify-content:center;">Próximo passo</div>
+    <h2>Descubra o impacto real da reforma na sua operação antes que 2027 chegue.</h2>
+    <p>O diagnóstico inicial é gratuito e aponta, em números, onde sua empresa ganha e onde perde na transição. A partir daí, você decide se quer seguir com o plano completo.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="mailto:contato@marcoreformatributaria.com.br">Agendar diagnóstico gratuito</a>
+      <a class="btn-ghost" href="tel:+551140028922">ou ligue: (11) 4002-8922</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fcol">
+      <h4>Altax Contabilidade</h4>
+      <a href="#mudanca">O que muda</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#processo">Como trabalhamos</a>
+    </div>
+    <div class="fcol">
+      <h4>Contato</h4>
+      <a href="mailto:contato@marcoreformatributaria.com.br">contato@marcoreformatributaria.com.br</a>
+      <a href="tel:+551140028922">(11) 4002-8922</a>
+    </div>
+    <div class="fcol">
+      <h4>Escritório</h4>
+      <a href="#">São Paulo, SP</a>
+      <a href="#">Atendimento em todo o Brasil</a>
+    </div>
+  </div>
+  <div class="wrap bottom">
+    Altax Contabilidade · Conteúdo informativo, não substitui orientação contábil ou jurídica formal.
+  </div>
+</footer>
+
+<script>
+  // Barra de progresso de leitura
+  const progressBar = document.getElementById('scrollProgress');
+  const headerEl = document.querySelector('header');
+  const dotsNavEl = document.getElementById('dotsNav');
+  function updateProgress(){
+    const h = document.documentElement;
+    const scrolled = h.scrollTop;
+    const max = h.scrollHeight - h.clientHeight;
+    progressBar.style.width = (max > 0 ? (scrolled / max) * 100 : 0) + '%';
+    headerEl.classList.toggle('scrolled', scrolled > 8);
+    dotsNavEl.classList.toggle('visible', scrolled > 320);
+  }
+  document.addEventListener('scroll', updateProgress, { passive:true });
+  updateProgress();
+
+  // Navegação lateral por pontos (scrollspy)
+  const dots = Array.from(document.querySelectorAll('.dots-nav button'));
+  const dotTargets = dots.map(d => document.getElementById(d.dataset.target)).filter(Boolean);
+  dots.forEach(d => {
+    d.addEventListener('click', () => {
+      const el = document.getElementById(d.dataset.target);
+      if (el) el.scrollIntoView({ behavior:'smooth', block:'start' });
+    });
+  });
+  const dotObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const idx = dotTargets.indexOf(entry.target);
+      if (idx === -1) return;
+      if (entry.isIntersecting){
+        dots.forEach(d => d.classList.remove('active'));
+        dots[idx].classList.add('active');
+      }
+    });
+  }, { rootMargin: '-45% 0px -45% 0px', threshold:0 });
+  dotTargets.forEach(t => dotObserver.observe(t));
+
+  // Revelação de seções ao rolar
+  const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold:0.15 });
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  // Slider interativo da linha do tempo
+  const tlData = [
+    { year:'2026', title:'Fase de teste', desc:'CBS a 0,9% e IBS a 0,1%, sem aumento de carga — valores compensáveis com PIS/Cofins.', now:true },
+    { year:'2027', title:'CBS entra em regra', desc:'PIS e Cofins são extintos. IPI é reduzido a zero, exceto para produtos da Zona Franca de Manaus.', now:false },
+    { year:'2029', title:'IBS começa a subir', desc:'Início da transição estadual/municipal: ICMS e ISS iniciam redução gradual de dez pontos por ano.', now:false },
+    { year:'2030', title:'20% de transição', desc:'Continuidade da redução de ICMS/ISS na mesma proporção do avanço do IBS.', now:false },
+    { year:'2031', title:'30% de transição', desc:'Redução acumulada de ICMS e ISS chega a 30% frente aos percentuais originais.', now:false },
+    { year:'2032', title:'40% de transição', desc:'Último ano de convivência plena entre os dois sistemas antes da extinção final.', now:false },
+    { year:'2033', title:'Sistema pleno', desc:'ICMS e ISS extintos. IBS e CBS operam em regime definitivo, com alíquota de referência fixada.', now:false },
+    { year:'Contínuo', title:'Comitê Gestor do IBS', desc:'Órgão interfederativo passa a arrecadar, distribuir e fiscalizar o novo imposto compartilhado.', now:false },
+  ];
+  const tlRange = document.getElementById('tlRange');
+  const tlYear = document.getElementById('tlYear');
+  const tlTitle = document.getElementById('tlTitle');
+  const tlDesc = document.getElementById('tlDesc');
+  const tlFlag = document.getElementById('tlFlag');
+  const tlTicks = Array.from(document.querySelectorAll('.tl-tick'));
+
+  function renderTl(i){
+    const d = tlData[i];
+    tlYear.textContent = d.year;
+    tlYear.classList.add('active');
+    tlTitle.textContent = d.title;
+    tlDesc.textContent = d.desc;
+    tlFlag.classList.toggle('visible', d.now);
+    tlTicks.forEach(t => t.classList.toggle('active', Number(t.dataset.i) === i));
+  }
+  renderTl(0);
+  tlRange.addEventListener('input', (e) => renderTl(Number(e.target.value)));
+  tlTicks.forEach(t => {
+    t.addEventListener('click', () => {
+      const i = Number(t.dataset.i);
+      tlRange.value = i;
+      renderTl(i);
+    });
+  });
+</script>
+
+</body>
+</html>
